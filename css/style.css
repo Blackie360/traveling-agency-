@@ -63,7 +63,7 @@
 }
 
 
-/*** Navbar ***/
+/* ** Navbar **
 .navbar-light .navbar-nav .nav-link {
     font-family: 'Nunito', sans-serif;
     position: relative;
@@ -130,7 +130,7 @@
     
     .sticky-top.navbar-light {
         position: fixed;
-        background: #FFFFFF;
+        background: #0f0d0d;
     }
 
     .navbar-light .navbar-nav .nav-link::before {
@@ -155,7 +155,7 @@
     }
 }
 
-
+ */
 
 
 /*** Hero Header ***/
@@ -629,3 +629,4 @@
     height:3000px;
 }
 
+/**recent**/
