@@ -95,6 +95,47 @@
     });
     
 })(jQuery);
+//stk push
 
+const form = document.querySelector('form');
+form.addEventListener('submit', function(event) {
+  event.preventDefault(); // prevent the form from submitting normally
+
+  const phoneNumber = form.elements.phone_number.value;
+
+  // use the Daraja APIs to initiate the STK push
+  const url = 'https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest';
+  const accessToken = 'your_access_token_here';
+  const businessShortCode = 'your_business_short_code_here';
+  const passkey = 'your_passkey_here';
+  const amount = '10'; // the amount to charge the customer
+  const timestamp = new Date().toISOString().replace(/[^0-9]/g, '').slice(0, -3); // current timestamp in the format required by the APIs
+  const password = btoa(`${businessShortCode}${passkey}${timestamp}`); // generate the password required by the APIs
+  const requestBody = {
+    BusinessShortCode: businessShortCode,
+    Password: password,
+    Timestamp: timestamp,
+    TransactionType: 'CustomerPayBillOnline',
+    Amount: amount,
+    PartyA: phoneNumber,
+    PartyB: businessShortCode,
+    PhoneNumber: phoneNumber,
+    CallBackURL: 'https://your-callback-url-here.com',
+    AccountReference: 'your_account_reference_here',
+    TransactionDesc: 'your_transaction_description_here'
+  };
+  const options = {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${accessToken}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestBody)
+  };
+  fetch(url, options)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+});
 
 
